@@ -1,5 +1,9 @@
 <script src="https://unpkg.com/htmx.org@1.9.5"></script>
-<!-- have a button POST a click via AJAX -->
-<button hx-post="/clicked" hx-trigger="click delay:2s">
-Click Me
-</button>
+<button hx-post="/clicked" hx-trigger="click">Click Me</button>
+<button class="cntdown"
+    hx-get="/countdown" 
+    hx-boost="true" 
+    hx-trigger="delay:1s"
+>cntdown</button>
+<button hx-get="/start_timer" hx-trigger="click" hx-target="previous button" hx-trigger="delay:0.3s">start</button>
+<button hx-get="/stop_timer" hx-target="#cntdown">stop</button>
