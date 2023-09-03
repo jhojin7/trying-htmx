@@ -31,5 +31,63 @@ def cntdown():
         return f"{sec}"
 
 
+data = [
+    {
+        "title": "The Great Gatsby",
+        "author": "F. Scott Fitzgerald",
+        "publisher": "Scribner",
+        "published_date": "April 10, 1925",
+    },
+    {
+        "title": "To Kill a Mockingbird",
+        "author": "Harper Lee",
+        "publisher": "J. B. Lippincott & Co.",
+        "published_date": "July 11, 1960",
+    },
+    {
+        "title": "1984",
+        "author": "George Orwell",
+        "publisher": "Secker & Warburg",
+        "published_date": "June 8, 1949",
+    },
+    {
+        "title": "Pride and Prejudice",
+        "author": "Jane Austen",
+        "publisher": "T. Egerton, Whitehall",
+        "published_date": "January 28, 1813",
+    },
+    {
+        "title": "The Catcher in the Rye",
+        "author": "J.D. Salinger",
+        "publisher": "Little, Brown and Company",
+        "published_date": "July 16, 1951",
+    },
+]
+
+
+@app.get("/tbl")
+def tbl():
+    global data
+    html = ""
+    for d in data:
+        html += f"<tr><td>{d['title']}</td><td>{d['author']}</tr>"
+        #     + f"<td>{d['title']}</td><td>{d['author']}</td><td>{d['published_date']}</td>"
+    print(html)
+    return HTMLResponse(html)
+
+
+@app.post("/search")
+def search(title, author):
+    global data
+    html = ""
+    for d in data:
+        if not ((title and title in d["title"]) and (author and author in d["author"])):
+            continue
+        html += f"<tr><td>{d['title']}</td><td>{d['author']}</tr>"
+        #     + f"<td>{d['title']}</td><td>{d['author']}</td><td>{d['published_date']}</td>"
+    print(html)
+    return HTMLResponse(html)
+
+
 if __name__ == "__main__":
     uvicorn.run(app="main:app", reload=True)
