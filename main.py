@@ -71,22 +71,26 @@ def tbl():
     html = ""
     for d in data:
         html += f"<tr><td>{d['title']}</td><td>{d['author']}</tr>"
-        #     + f"<td>{d['title']}</td><td>{d['author']}</td><td>{d['published_date']}</td>"
     print(html)
     return HTMLResponse(html)
 
 
-@app.post("/search")
-def search(title, author):
+@app.get("/search")
+def search(title: str):
     global data
     html = ""
     for d in data:
-        if not ((title and title in d["title"]) and (author and author in d["author"])):
+        if not (title and title in d["title"].lower()):
             continue
         html += f"<tr><td>{d['title']}</td><td>{d['author']}</tr>"
-        #     + f"<td>{d['title']}</td><td>{d['author']}</td><td>{d['published_date']}</td>"
     print(html)
     return HTMLResponse(html)
+
+
+@app.get("/getting")
+def getting(x):
+    print("!!!!!!!!!!!", x)
+    return str(x)
 
 
 if __name__ == "__main__":

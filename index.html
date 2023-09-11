@@ -9,15 +9,35 @@
 >cntdown</button>
 <button hx-get="/start_timer" hx-trigger="click" hx-target="previous button" hx-trigger="delay:0.3s">start</button>
 <button hx-get="/stop_timer" hx-target="#cntdown">stop</button>
+
+<form
+        hx-get="/getting"
+        hx-trigger="clicked"
+        hx-include="[name='x']"
+>
+    <input name="x"></input>
+    <button 
+    >replace input value here
+    </button>
+</form>
+
+<br>
+<input placeholder="search title" name="title"></input>
+<button hx-get="/search" 
+    hx-target="tbody"
+    hx-include="[name='title']"
+>search</button>
+
+<br>
 <table>
     <thead>
         <th>
             Title<br>
-            <input placeholder="title" hx-post="/search" hx-target="tbody">
+            <!-- <input placeholder="title" hx-post="/search" hx-target="tbody"> -->
         </th>
         <th>
             Author<br>
-            <input placeholder="author">
+            <!-- <input placeholder="author"> -->
         </th>
 
     </thead>
